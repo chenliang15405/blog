@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html >
 <html>
 	<head>
@@ -22,10 +24,21 @@
 					location.href="${pageContext.request.contextPath}/blog/content/"+blogId;
 				}
 				
-				
+				$(function () {            
+		            $(".like").click(function () {
+		            	//toggleClass,就是如果这个cs这个class如果存在，则删除，如果不存在，则设置
+		                //$(this).toggleClass('cs');  
+		                $(this).addClass('cs');
+		            	//TODO 点击之后，提交参数，设置blog的点赞次数
+		            })
+		        })
 				
 		
 		</script>
+		<style type="text/css">
+			.like{ font-size:66px;  color:#ccc; cursor:pointer;}
+			.cs{color:#f00;}
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -34,7 +47,7 @@
 					<img alt="" src="<%=request.getContextPath() %>/static/img/2.gif">
 				</div>
 			</div>
-			<div class="row" ">
+			<div class="row" >
 				<nav class="navbar navbar-default" role="navigation">
 				    <div class="container-fluid" >
 					    <div class="navbar-header">
@@ -61,21 +74,29 @@
 				</nav>
 				</div>
 				
-				<div onclick="content('11')">
-					<div style="background-color:#FFFFCC;width:800px;height:200px;">
-						<div style="float:left;">
-					   		<img alt="" width="300px" height="200px" align="middle" src="<%=request.getContextPath() %>/static/img/title_1.jpg">
+				<c:forEach items="${blogList }" var="blog">
+					<div >
+						<div style="background-color:#FFFFCC;width:800px;height:200px;">
+							<div style="float:left;">
+						   		<img alt="" width="300px" height="200px" align="middle" src="<%=request.getContextPath() %>/upload/${blog.img}">
+							</div>
+							<div ondblclick="content('${blog.id}')"  style="float:left;padding-top:20px;padding-left:15px;">
+					        	<ul>
+					        		<li  style="list-style-type:none;font-size: 30px;font-weight: blod">
+					        			${blog.title }
+					        		</li>
+					        		<li style="list-style-type:none;padding-bottom:10px;">
+					        			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<fmt:formatDate value="${blog.releaseDate }" pattern="yyyy-MM-dd  hh:mm:ss"/>&emsp;&emsp;&emsp;${blog.blogType.typeName}
+					        		</li>
+					        		<li style="list-style-type:none;font-family: cursive;font-size: 20px">${blog.summary}</li>
+					        	</ul>
+							 </div>
+							 <div style="float:right;padding-top:130px;padding-left:15px;">
+							 	<p class="like">&#10084;</p>
+							 </div>
+					       </div>
 						</div>
-						<div  style="float:left;padding-top:20px;padding-left:15px;">
-				        	<ul>
-				        		<li  style="list-style-type:none">标题</li>
-				        		<li style="list-style-type:none">时间，分类</li>
-				        		<li style="list-style-type:none">描述</li>
-				        	</ul>
-						</div>
-				     </div>
-				</div>
-			
+					</c:forEach>
 			
 			</div>
 		

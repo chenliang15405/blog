@@ -1,5 +1,7 @@
 package cl.blog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cl.blog.entity.Blog;
+import cl.blog.entity.BlogType;
 import cl.blog.service.BlogService;
 
 /**
@@ -33,7 +36,8 @@ public class BlogController {
 	//编辑页面展示
 	@RequestMapping(value="/editor")
 	public String getContent(Model model) {
-		
+		List<BlogType> list = blogService.findBlogType();
+		model.addAttribute("blogTypeList", list);
 		return "blogEditor";
 	}
 	
@@ -42,11 +46,19 @@ public class BlogController {
 	public String addBlog(Blog blog,Model model) {
 		boolean b = blogService.saveBlog(blog);
 		if(b) {
-			return "";
+			return "blog/home";
 		}
-		return "";
+		return "fail";
 	}
 	
+	
+	@RequestMapping("home")
+	public String blogHome(Model model) {
+		List<Blog> blogList = blogService.findAll();
+		String typeName = blogList.get(0).getBlogType().getTypeName();
+		model.addAttribute("blogList", blogList);
+		return "home/index";
+	}
 	
 	
 }
