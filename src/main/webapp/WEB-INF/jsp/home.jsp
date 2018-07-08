@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>个人博客</title>
 		<script type="text/javascript" src="<%=request.getContextPath() %>/static/js/jquery.min.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath() %>/static/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/css/bootstrap.min.css">
@@ -24,20 +24,20 @@
 					location.href="${pageContext.request.contextPath}/blog/content/"+blogId;
 				}
 				
-				$(function () {            
+			/* 	$(function () {            
 		            $(".like").click(function () {
 		            	//toggleClass,就是如果这个cs这个class如果存在，则删除，如果不存在，则设置
 		                //$(this).toggleClass('cs');  
 		                $(this).addClass('cs');
 		            	//TODO 点击之后，提交参数，设置blog的点赞次数
 		            })
-		        })
+		        }) */
 				
 		
 		</script>
 		<style type="text/css">
-			.like{ font-size:66px;  color:#ccc; cursor:pointer;}
-			.cs{color:#f00;}
+			/* .like{ font-size:66px;  color:#ccc; cursor:pointer;}
+			.cs{color:#f00;} */
 		</style>
 	</head>
 	<body>
@@ -91,10 +91,13 @@
 					        		<li style="list-style-type:none;font-family: cursive;font-size: 20px">${blog.summary}</li>
 					        	</ul>
 							 </div>
-							 <div style="float:right;padding-top:130px;padding-left:15px;">
+							<!--  <div style="float:right;padding-top:130px;padding-left:15px;">
 							 	<p class="like">&#10084;</p>
-							 </div>
+							 </div> -->
 					       </div>
+						</div>
+						<div style="padding-top:20px">
+						
 						</div>
 					</c:forEach>
 			

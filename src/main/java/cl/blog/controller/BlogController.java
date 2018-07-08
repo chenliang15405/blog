@@ -46,7 +46,7 @@ public class BlogController {
 	public String addBlog(Blog blog,Model model) {
 		boolean b = blogService.saveBlog(blog);
 		if(b) {
-			return "blog/home";
+			return "redirect:/blog/home";
 		}
 		return "fail";
 	}
@@ -57,7 +57,7 @@ public class BlogController {
 		List<Blog> blogList = blogService.findAll();
 		String typeName = blogList.get(0).getBlogType().getTypeName();
 		model.addAttribute("blogList", blogList);
-		return "home/index";
+		return "home";
 	}
 	
 	

@@ -34,13 +34,14 @@ position: fixed;
     </head>
     <body id="login-page">
         <canvas width="1293" height="717"></canvas>
+        
     <script>
 /**
  * Created by Administrator on 2016/6/29.
  */
     var canvas = document.querySelector('canvas'),
-        ctx = canvas.getContext('2d')
         canvas.width = window.innerWidth;
+        ctx = canvas.getContext('2d')
         canvas.height = window.innerHeight;
 
         ctx.lineWidth = .3;
